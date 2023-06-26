@@ -2,9 +2,11 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import LoadingResolve from '../Loading/LoadingResolve';
+import Search from '../SearchBar/Search';
 export default function HomePage() {
     const [coords, setCoords] = useState({latitude:-1, longitude:-1});
     const [loading, setLoading] = useState(true);
+    const [knownName, setKnownName] = useState('');
     useEffect(() => {
         toast.success("Welcome to Vatavaran Weather");
         function getLocation(){
@@ -48,6 +50,8 @@ export default function HomePage() {
     {!loading &&<>
      latitude: {coords.latitude}<hr/>
      longitude: {coords.longitude}<hr/>
+     Known Name: {knownName}<hr/>
+    <Search setKnown={setKnownName} setCoords={setCoords}/>
      </>
     }
     <div>

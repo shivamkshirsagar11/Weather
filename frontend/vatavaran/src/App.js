@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import HomePage from './UI/Home/HomePage';
 // ----------------------------------------------------------------
 function App() {
+  // require('dotenv').config();
   return (
     <>
     <BrowserRouter>
