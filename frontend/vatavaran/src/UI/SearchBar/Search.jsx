@@ -2,25 +2,23 @@ import React,{useState} from 'react'
 import {toast} from 'react-toastify';
 import fromZIP from '../../Actions/Location/fromZIP';
 import fromCity from '../../Actions/Location/fromCity';
-export default function Search({setKnown, setCoords}) {
+import getWeatherData from '../../Actions/Weather/getWeatherData';
+export default function Search({setKnown, setWeatherData}) {
     const [searchValue, setSearchValue] = useState('');
     async function onSearchClick(){
       if(!isNaN(searchValue)){
-        //call pincode
         const tempLoc = await fromZIP(searchValue);
         if (tempLoc.latitude === undefined) {
           toast.error("Error: Invalid Zipcode");
           setKnown('Undefined')
         }
         else{
+          const wdata = await getWeatherData(tempLoc.latitude, tempLoc.longitude);
           setKnown(tempLoc.name);
-          setCoords({latitude: tempLoc.latitude, longitude: tempLoc.longitude})
+          setWeatherData(wdata);
         }
-        // toast.info(searchValue);
-        // setSearchValue('');
       }
       else if(/^[a-zA-Z]+$/.test(searchValue)){
-        // call city
         let city = searchValue.toLowerCase();
         const tempLoc = await fromCity(city);
         if (tempLoc.latitude === undefined) {
@@ -28,11 +26,10 @@ export default function Search({setKnown, setCoords}) {
           setKnown('Undefined')
         }
         else{
+          const wdata = await getWeatherData(tempLoc.latitude, tempLoc.longitude);
+          setWeatherData(wdata);
           setKnown(tempLoc.name);
-          setCoords({latitude: tempLoc.latitude, longitude: tempLoc.longitude})
         }
-        // toast.info(city);
-        // setSearchValue('');
       }
       else{
         toast.error("Please enter a valid search value");

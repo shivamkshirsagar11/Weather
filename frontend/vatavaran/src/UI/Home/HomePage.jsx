@@ -3,10 +3,12 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import LoadingResolve from '../Loading/LoadingResolve';
 import Search from '../SearchBar/Search';
+import CurrentWeatherCard from '../WeatherInfo/CurrentWeatherCard';
+import getWeatherData from '../../Actions/Weather/getWeatherData';
 export default function HomePage() {
-    const [coords, setCoords] = useState({latitude:-1, longitude:-1});
     const [loading, setLoading] = useState(true);
     const [knownName, setKnownName] = useState('');
+    const [weatherData, setWeatherData] = useState({});
     useEffect(() => {
         toast.success("Welcome to Vatavaran Weather");
         function getLocation(){
@@ -15,11 +17,11 @@ export default function HomePage() {
               } else {
                 toast.error("Location Not Supported");
               }
+              setLoading(false);
         }
-        function onSuccess(pos){
-            let tempLoc = {latitude:pos.coords.latitude,longitude:pos.coords.longitude};
-            setCoords(tempLoc);
-            setLoading(false);
+        async function onSuccess(pos){
+            const currentCityData = await getWeatherData(pos.coords.latitude, pos.coords.longitude);
+            setKnownName(currentCityData.city.name);
         }
         function onError(){
             toast.error("Error Getting location from GPS");
@@ -33,12 +35,12 @@ export default function HomePage() {
                   const { ip } = response1.data;
                   const response = await axios.get(`http://ip-api.com/json/${ip}`);
                     const { lat, lon } = response.data;
-                    setCoords({latitude:lat,longitude:lon});
+                    const currentCityData = await getWeatherData(lat, lon);
+                    setKnownName(currentCityData.city.name);
                 } catch (error) {
                   toast.error('Error fetching IP address');
                   toast.error("Please Enter Location Manually, Error getting Location");
                 }
-                setLoading(false);
               };
               await fetchIPAddressAndLoc();
         }
@@ -48,17 +50,11 @@ export default function HomePage() {
     <>
     {loading && <LoadingResolve/>}
     {!loading &&<>
-     latitude: {coords.latitude}<hr/>
-     longitude: {coords.longitude}<hr/>
      Known Name: {knownName}<hr/>
-    <Search setKnown={setKnownName} setCoords={setCoords}/>
+    <Search setKnown={setKnownName} setWeatherData = {setWeatherData}/>
+    {Object.keys(weatherData).length !== 0 && <CurrentWeatherCard/>}
      </>
     }
-    <div>
-        <h1>
-            Vatavaran Weather app
-        </h1>
-        </div>
     </>
   )
 }
