@@ -1,37 +1,19 @@
 import React, {useState, useEffect} from "react";
+import unixUtcToLocal from "../../Actions/Date/UnixUtcToLocal";
 export default function CurrentWeatherCard({ weatherData:{current} }) {
   console.log(current);
   const [sunrise, setSunrise] = useState('');
   const [sunset, setSunset] = useState('');
   useEffect(()=>{
-    function unixUtcToLocal(){
-      var date= new Date(current.sys.sunrise * 1000);
-      // Hours part from the timestamp
-      var hours = date.getHours();
-      // Minutes part from the timestamp
-      var minutes = date.getMinutes().length < 2 ? '0' + date.getMinutes(): date.getMinutes();
-      // Seconds part from the timestamp
-      var seconds = date.getSeconds().length < 2 ? '0' + date.getSeconds(): date.getSeconds();
-      var sunrise = hours + ':' + minutes + ':' + seconds;
-
-      var date= new Date(current.sys.sunset * 1000);
-      // Hours part from the timestamp
-      var hours = date.getHours();
-      // Minutes part from the timestamp
-      var minutes = date.getMinutes().length < 2 ? '0' + date.getMinutes(): date.getMinutes();
-      // Seconds part from the timestamp
-      var seconds = date.getSeconds().length < 2 ? '0' + date.getSeconds(): date.getSeconds();
-      var sunset = hours + ':' + minutes + ':' + seconds;
-      setSunrise(sunrise);
-      setSunset(sunset);
-    }
-    unixUtcToLocal();
+    let [sunrise, sunset] = unixUtcToLocal(current.sys.sunrise, current.sys.sunset);
+    setSunrise(sunrise);
+    setSunset(sunset);
   }, [current])
   let prePath = "http://openweathermap.org/img/w/"
   return (
     <div className="d-flex justify-content-center">
       <div className="card text-white bg-dark mb-3" style={{ width: "30rem" }}>
-        <img className="img-thumbnai" src={prePath+current.weather[0].icon+'.png'} style={{width:"150px"}}/>
+        <img className="img-thumbnai" src={prePath+current.weather[0].icon+'.png'} style={{width:"150px"}} alt="this is perception of current weather"/>
         <div className="card-body">
           <h5 className="card-title">{current.name}</h5>
           <p className="card-text">
