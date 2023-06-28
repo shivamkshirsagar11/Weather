@@ -10,7 +10,8 @@ export default function Search({setKnown, setWeatherData}) {
         const tempLoc = await fromZIP(searchValue);
         if (tempLoc.latitude === undefined) {
           toast.error("Error: Invalid Zipcode");
-          setKnown('Undefined')
+          setKnown('Undefined');
+          setWeatherData({});
         }
         else{
           const wdata = await getWeatherData(tempLoc.latitude, tempLoc.longitude);
@@ -23,7 +24,8 @@ export default function Search({setKnown, setWeatherData}) {
         const tempLoc = await fromCity(city);
         if (tempLoc.latitude === undefined) {
           toast.error("Error: Invalid City");
-          setKnown('Undefined')
+          setKnown('Undefined');
+          setWeatherData({});
         }
         else{
           const wdata = await getWeatherData(tempLoc.latitude, tempLoc.longitude);
@@ -37,11 +39,13 @@ export default function Search({setKnown, setWeatherData}) {
       }
     }
   return (
-    <div>
-      <div className="input-group">
-  <input type="search" className="form-control rounded" placeholder="Search City/Zipcode" aria-label="Search" aria-describedby="search-addon" value={searchValue} onChange={(e)=>setSearchValue(e.target.value)}/>
-  <button type="button" className="btn btn-outline-primary" onClick={onSearchClick}>search</button>
+     <div className="container input-group mb-3 p-5">
+  <input type="text" className="form-control" placeholder="City/Zip" value={searchValue} onChange={(e)=>setSearchValue(e.target.value)} onKeyPress={(e)=>{
+    if(e.key === 'Enter'){
+      onSearchClick();
+    }
+  }}/>
+  <span className="input-group-text" onClick={onSearchClick} style={{cursor:"pointer"}}>🔍</span>
 </div>
-    </div>
   )
 }

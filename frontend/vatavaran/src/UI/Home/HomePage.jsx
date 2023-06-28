@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import LoadingResolve from '../Loading/LoadingResolve';
 import Search from '../SearchBar/Search';
 import CurrentWeatherCard from '../WeatherInfo/CurrentWeatherCard';
+import Navbar from '../Navbar/Navbar';
 import getWeatherData from '../../Actions/Weather/getWeatherData';
 export default function HomePage() {
     const [loading, setLoading] = useState(true);
@@ -21,7 +22,9 @@ export default function HomePage() {
         }
         async function onSuccess(pos){
             const currentCityData = await getWeatherData(pos.coords.latitude, pos.coords.longitude);
-            setKnownName(currentCityData.city.name);
+            // console.log(currentCityData);
+            setKnownName(currentCityData.daily.city.name);
+            setWeatherData(currentCityData);
         }
         function onError(){
             toast.error("Error Getting location from GPS");
@@ -36,7 +39,9 @@ export default function HomePage() {
                   const response = await axios.get(`http://ip-api.com/json/${ip}`);
                     const { lat, lon } = response.data;
                     const currentCityData = await getWeatherData(lat, lon);
-                    setKnownName(currentCityData.city.name);
+                    // console.log(currentCityData);
+                    setKnownName(currentCityData.daily.city.name);
+                    setWeatherData(currentCityData);
                 } catch (error) {
                   toast.error('Error fetching IP address');
                   toast.error("Please Enter Location Manually, Error getting Location");
@@ -48,13 +53,10 @@ export default function HomePage() {
     }, []);
   return (
     <>
+  <Navbar/>
     {loading && <LoadingResolve/>}
-    {!loading &&<>
-     Known Name: {knownName}<hr/>
-    <Search setKnown={setKnownName} setWeatherData = {setWeatherData}/>
-    {Object.keys(weatherData).length !== 0 && <CurrentWeatherCard/>}
-     </>
-    }
+    {!loading && <Search setKnown={setKnownName} setWeatherData={setWeatherData}/>}
+    {!loading && Object.keys(weatherData).length !== 0 &&<CurrentWeatherCard weatherData={weatherData}/>}
     </>
   )
 }
