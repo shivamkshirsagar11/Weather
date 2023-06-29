@@ -11,8 +11,8 @@ export default function CurrentWeatherCard({ weatherData:{current} }) {
   }, [current])
   let prePath = "http://openweathermap.org/img/w/"
   return (
-    <div className="d-flex justify-content-center">
-      <div className="card text-white bg-dark mb-3" style={{ width: "30rem" }}>
+    <div className="d-flex justify-content-center p-5">
+      <div className="card text-white bg-dark shadow-lg p-3 mb-5 rounded" style={{ width: "30rem" }}>
         <img className="img-thumbnai" src={prePath+current.weather[0].icon+'.png'} style={{width:"150px"}} alt="this is perception of current weather"/>
         <div className="card-body">
           <h5 className="card-title">{current.name}</h5>

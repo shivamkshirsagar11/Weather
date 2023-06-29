@@ -2,13 +2,12 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import LoadingResolve from '../Loading/LoadingResolve';
-import Search from '../SearchBar/Search';
 import CurrentWeatherCard from '../WeatherInfo/CurrentWeatherCard';
 import Navbar from '../Navbar/Navbar';
 import getWeatherData from '../../Actions/Weather/getWeatherData';
+import bg_gif from '../../icons/weather.gif'
 export default function HomePage() {
     const [loading, setLoading] = useState(true);
-    const [knownName, setKnownName] = useState('');
     const [weatherData, setWeatherData] = useState({});
     useEffect(() => {
         toast.success("Welcome to Vatavaran Weather");
@@ -22,8 +21,6 @@ export default function HomePage() {
         }
         async function onSuccess(pos){
             const currentCityData = await getWeatherData(pos.coords.latitude, pos.coords.longitude);
-            // console.log(currentCityData);
-            setKnownName(currentCityData.daily.city.name);
             setWeatherData(currentCityData);
         }
         function onError(){
@@ -39,8 +36,6 @@ export default function HomePage() {
                   const response = await axios.get(`http://ip-api.com/json/${ip}`);
                     const { lat, lon } = response.data;
                     const currentCityData = await getWeatherData(lat, lon);
-                    // console.log(currentCityData);
-                    setKnownName(currentCityData.daily.city.name);
                     setWeatherData(currentCityData);
                 } catch (error) {
                   toast.error('Error fetching IP address');
@@ -52,11 +47,15 @@ export default function HomePage() {
         getLocation();
     }, []);
   return (
-    <>
-  <Navbar/>
+    // <div style={{
+    //   backgroundImage: "url(" + bg_gif + ")",
+    //   backgroundSize: "cover",
+    //   height: "100vh",
+    // }}>
+    <div>
+  <Navbar setWeatherData={setWeatherData}/>
     {loading && <LoadingResolve/>}
-    {!loading && <Search setKnown={setKnownName} setWeatherData={setWeatherData}/>}
     {!loading && Object.keys(weatherData).length !== 0 &&<CurrentWeatherCard weatherData={weatherData}/>}
-    </>
+    </div>
   )
 }
