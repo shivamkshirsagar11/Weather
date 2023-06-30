@@ -5,11 +5,12 @@ import Spinner from "../Loading/Spinner";
 import CurrentWeatherCard from "../WeatherInfo/CurrentWeatherCard";
 import Navbar from "../Navbar/Navbar";
 import getWeatherData from "../../Actions/Weather/getWeatherData";
+import DailyWeatherCard from "../WeatherInfo/DailyWeatherCard";
 // import bg_gif from '../../icons/weather.gif'
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [weatherData, setWeatherData] = useState({});
-  const [btnText, setBtnText] = useState('7 Day Weather');
+  const [btnText, setBtnText] = useState("7 Day Weather");
   const [isDaily, setIsDaily] = useState(false);
   useEffect(() => {
     toast.success("Welcome to Vatavaran Weather", {
@@ -76,11 +77,19 @@ export default function HomePage() {
     //   height: "100vh",
     // }}>
     <div>
-      <Navbar setWeatherData={setWeatherData} setLoading={setLoading} btnText={btnText} setIsDaily={setIsDaily} setBtnText={setBtnText} isDaily={isDaily}/>
+      <Navbar
+        setWeatherData={setWeatherData}
+        setLoading={setLoading}
+        btnText={btnText}
+        setIsDaily={setIsDaily}
+        setBtnText={setBtnText}
+        isDaily={isDaily}
+      />
       {loading && <Spinner />}
-      {!loading && Object.keys(weatherData).length !== 0 && 
-        !isDaily && <CurrentWeatherCard weatherData={weatherData} />
-      }
+      {!loading && Object.keys(weatherData).length !== 0 && !isDaily && (
+        <CurrentWeatherCard weatherData={weatherData} />
+      )}
+      {isDaily && <DailyWeatherCard weatherData={weatherData} />}
     </div>
   );
 }

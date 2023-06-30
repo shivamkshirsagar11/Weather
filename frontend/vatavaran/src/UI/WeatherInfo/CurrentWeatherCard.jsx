@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import unixUtcToLocal from "../../Actions/Date/UnixUtcToLocal";
 export default function CurrentWeatherCard({ weatherData: { current } }) {
-  console.log(current);
+  // console.log(current);
   const [sunrise, setSunrise] = useState("");
   const [sunset, setSunset] = useState("");
   useEffect(() => {
@@ -19,13 +19,13 @@ export default function CurrentWeatherCard({ weatherData: { current } }) {
         className="card text-white bg-dark shadow-lg p-3 mb-5 rounded"
         style={{ width: "30rem" }}
       >
-        <div className='text-center'>
-        <img
-          className="img-thumbnai"
-          src={prePath + current.weather[0].icon + "@2x.png"}
-          style={{ width: "150px" }}
-          alt="this is perception of current weather"
-        />
+        <div className="text-center">
+          <img
+            className="img-thumbnai"
+            src={prePath + current.weather[0].icon + "@2x.png"}
+            style={{ width: "18rem" }}
+            alt="this is perception of current weather"
+          />
         </div>
         <div className="card-body">
           <h5 className="card-title">{current.name}</h5>
@@ -36,7 +36,7 @@ export default function CurrentWeatherCard({ weatherData: { current } }) {
           <div className="col">
             <ul>
               <li>
-                Temprature
+                Temprature 🌡️
                 <ul>
                   <li>Current: {current.main.temp} C</li>
                   <li>Feels like: {current.main.feels_like} C</li>
@@ -46,45 +46,79 @@ export default function CurrentWeatherCard({ weatherData: { current } }) {
               </li>
             </ul>
           </div>
-          <div className="col">
-            <ul>
-              <li>
-                Wind
-                <ul>
-                  <li>Speed: {current.wind.speed} m/s</li>
-                  <li>Degree: {current.wind.deg}°</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
         </div>
         <hr />
         <div className="row">
-          <div className="col">
-            <ul>
-              <li>
-                Sun time
+          <div
+            id="carouselExampleControlsNoTouching"
+            className="carousel slide"
+            data-bs-touch="false"
+            data-bs-interval="false"
+          >
+            <div className="carousel-inner">
+              <div className="carousel-item active">
                 <ul>
-                  <li>Sunrise: {sunrise} </li>
-                  <li>Sunset: {sunset} </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div className="col">
-            <ul>
-              <li>
-                Other
-                <ul>
-                  <li>Pressure: {current.main.pressure} Pa</li>
                   <li>
-                    Humidity: {current.main.humidity} g.m<sup>-3</sup>
+                    Wind 💨
+                    <ul>
+                      <li>Speed: {current.wind.speed} m/s</li>
+                      <li>Degree: {current.wind.deg}°</li>
+                    </ul>
                   </li>
                 </ul>
-              </li>
-            </ul>
+              </div>
+              <div className="carousel-item">
+                <ul>
+                  <li>
+                    Sun time ☀️
+                    <ul>
+                      <li>Sunrise: {sunrise} </li>
+                      <li>Sunset: {sunset} </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div className="carousel-item">
+                <ul>
+                  <li>
+                    Other 📝
+                    <ul>
+                      <li>Pressure: {current.main.pressure} hPa</li>
+                      <li>
+                        Humidity: {current.main.humidity} g.m<sup>-3</sup>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <button
+              className="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleControlsNoTouching"
+              data-bs-slide="prev"
+            >
+              <span
+                className="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span className="visually-hidden">Previous</span>
+            </button>
+            <button
+              className="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleControlsNoTouching"
+              data-bs-slide="next"
+            >
+              <span
+                className="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span className="visually-hidden">Next</span>
+            </button>
           </div>
         </div>
+        <hr />
       </div>
     </div>
   );

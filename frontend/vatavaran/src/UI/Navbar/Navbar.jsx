@@ -1,14 +1,21 @@
 import React from "react";
 import logo from "../../icons/logo.svg";
 import Search from "../SearchBar/Search";
-export default function Navbar({ setWeatherData, setLoading, btnText, isDaily, setBtnText, setIsDaily}) {
-  function onButtonClick(){
-    if(!isDaily){
+export default function Navbar({
+  setWeatherData,
+  setLoading,
+  btnText,
+  isDaily,
+  setBtnText,
+  setIsDaily,
+}) {
+  function onButtonClick() {
+    if (!isDaily) {
       setIsDaily(true);
       setBtnText("Show Current Weather");
-    }else{
+    } else {
       setIsDaily(false);
-      setBtnText("7 Day Weather")
+      setBtnText("7 Day Weather");
     }
   }
   return (
@@ -28,12 +35,14 @@ export default function Navbar({ setWeatherData, setLoading, btnText, isDaily, s
           <li className="nav-item">
             <Search setWeatherData={setWeatherData} setLoading={setLoading} />
           </li>
-        </ul>    
+        </ul>
         <ul className="navbar-nav me-auto">
           <li className="nav-item">
-            <button className="btn btn-success" onClick={onButtonClick}>{btnText}</button>
+            <button className="btn btn-warning" onClick={onButtonClick}>
+              {btnText}
+            </button>
           </li>
-        </ul>    
+        </ul>
       </div>
     </nav>
   );
