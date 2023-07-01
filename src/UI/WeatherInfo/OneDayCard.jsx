@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import unixUtcToLocal from "../../Actions/Date/UnixUtcToLocal";
+
+// This function is used for showing daily weather data of particular day
+// Props: 
+// - Data: object containing weather data of daily weather
+// - city: name of current searched/located location
 export default function OneDayCard({ data, city }) {
+  // url of openweathermap for fetching icons
   let prePath = "http://openweathermap.org/img/wn/";
+  // getting date from utc timestamp and converting to local datetime format
   let date = new Date(data.dt * 1000).toLocaleDateString();
   const [sunrise, setSunrise] = useState("");
   const [sunset, setSunset] = useState("");

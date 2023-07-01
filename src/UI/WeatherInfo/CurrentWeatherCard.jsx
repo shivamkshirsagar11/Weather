@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import unixUtcToLocal from "../../Actions/Date/UnixUtcToLocal";
+
+// This function is used for current weather card
+// Props: 
+// - WeatherData: object containing weather data of current and daily weather
+// - current: weather data of current searched/located location
 export default function CurrentWeatherCard({ weatherData: { current } }) {
-  // console.log(current);
+  // converting utc time to local time
   const [sunrise, setSunrise] = useState("");
   const [sunset, setSunset] = useState("");
   useEffect(() => {
@@ -12,6 +17,7 @@ export default function CurrentWeatherCard({ weatherData: { current } }) {
     setSunrise(sunrise);
     setSunset(sunset);
   }, [current]);
+  // fetching icons from openweathermap api
   let prePath = "http://openweathermap.org/img/wn/";
   return (
     <div className="d-flex justify-content-center p-5">

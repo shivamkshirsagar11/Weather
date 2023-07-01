@@ -1,12 +1,17 @@
 import React from "react";
 import OneDayCard from "./OneDayCard";
+
+// This function is used for displaying iterrative daily card
+// Props: 
+// - WeatherData: object containing weather data of current and daily weather
+// - current: weather data of current searched/located location
+// - name: name of searched/located location
 export default function DailyWeatherCard({
   weatherData: { daily },
   weatherData: {
     current: { name },
   },
 }) {
-  console.log(daily);
   return (
     <div className="d-flex justify-content-center p-5">
       <div

@@ -6,16 +6,17 @@ import CurrentWeatherCard from "../WeatherInfo/CurrentWeatherCard";
 import Navbar from "../Navbar/Navbar";
 import getWeatherData from "../../Actions/Weather/getWeatherData";
 import DailyWeatherCard from "../WeatherInfo/DailyWeatherCard";
-// import bg_gif from '../../icons/weather.gif'
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [weatherData, setWeatherData] = useState({});
   const [btnText, setBtnText] = useState("7 Day Weather");
   const [isDaily, setIsDaily] = useState(false);
   useEffect(() => {
+    // greeting user
     toast.success("Welcome to Vatavaran Weather", {
       position: toast.POSITION.TOP_CENTER,
     });
+    // giving user info.warning message
     toast.warning(
       "Getting Location may take a few seconds, You can search manually",
       {
@@ -27,6 +28,7 @@ export default function HomePage() {
         },
       }
     );
+    // This function is used for getting user's current location
     function getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(onSuccess, onError);
@@ -48,6 +50,8 @@ export default function HomePage() {
       toast.info("Getting location from IP");
       fromIP();
     }
+    // This function is used for getting location using ip packet of user's
+    // only called if location service is not available or disabled
     async function fromIP() {
       const fetchIPAddressAndLoc = async () => {
         try {
@@ -71,11 +75,6 @@ export default function HomePage() {
     getLocation();
   }, []);
   return (
-    // <div style={{
-    //   backgroundImage: "url(" + bg_gif + ")",
-    //   backgroundSize: "cover",
-    //   height: "100vh",
-    // }}>
     <div>
       <Navbar
         setWeatherData={setWeatherData}
