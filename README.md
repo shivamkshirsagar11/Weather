@@ -18,7 +18,7 @@
 - [Setup](#setup)
 - [Usage/Features](#usage)
 - [Built Using](#built_using)
-- [Deployment](#deplopy)
+- [Deployment](#deploy)
 - [Authors](#authors)
 
 ## 🧐 About <a name = "about"></a>
