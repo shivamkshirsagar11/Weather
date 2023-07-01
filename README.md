@@ -18,6 +18,7 @@
 - [Setup](#setup)
 - [Usage/Features](#usage)
 - [Built Using](#built_using)
+- [Deployment](#deplopy)
 - [Authors](#authors)
 
 ## 🧐 About <a name = "about"></a>
@@ -88,6 +89,8 @@ npm start
 - [Bootstrap v5.3](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 - [openweathermap API](https://openweathermap.org/api)
 
+## 🌐 Deployed on Netlify <a name = "deploy"></a>
+- This project is also deployed on [Netlify](https://app.netlify.com/), view from [this link](https://projectvatavaran.netlify.app/)
 ## ✍️ Authors <a name = "authors"></a>
 
 - [@shivamkshirsagar11](https://github.com/shivamkshirsagar11)
