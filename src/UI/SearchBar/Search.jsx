@@ -36,7 +36,8 @@ export default function Search({ setWeatherData, setLoading }) {
       <input
         type="text"
         className="form-control"
-        placeholder="City/Zip"
+        placeholder="City/Zip wihtout space"
+        title="no spaces at start/middle/end."
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
         onKeyDown={(e) => {

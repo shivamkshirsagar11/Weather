@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../icons/logo.svg";
+import logo from "../../images/logo.svg";
 import Search from "../SearchBar/Search";
 export default function Navbar({
   setWeatherData,
