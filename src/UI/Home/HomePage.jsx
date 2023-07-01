@@ -89,7 +89,7 @@ export default function HomePage() {
       {!loading && Object.keys(weatherData).length !== 0 && !isDaily && (
         <CurrentWeatherCard weatherData={weatherData} />
       )}
-      {isDaily && <DailyWeatherCard weatherData={weatherData} />}
+      {isDaily &&  Object.keys(weatherData).length !== 0 &&  Object.keys(weatherData).length !== 0 && <DailyWeatherCard weatherData={weatherData} />}
     </div>
   );
 }

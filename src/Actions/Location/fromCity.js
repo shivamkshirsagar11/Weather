@@ -1,6 +1,6 @@
 export default async function fromCity(city) {
   const res = await fetch(
-    `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=dadb14165ec6b2765b2c3c182339bb39`
+    `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=dadb14165ec6b2765b2c3c182339bb39`
   );
   const data = await res.json();
   // console.log(data);
