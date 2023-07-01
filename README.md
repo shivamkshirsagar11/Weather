@@ -57,7 +57,7 @@ npm start
 
 <h3><b>Current Weather:</b> </h3>
 <ul><li>The app displays the current weather conditions, including temperature, humidity, wind speed, and weather description.</li>
-<li><img width=600px src="./src/images/current.png" alt="Current"/></li>
+<img width=600px src="./src/images/current.png" alt="Current"/>
 </ul>
 
 <h3><b>7-Day Forecast:</b> </h3>
@@ -73,13 +73,14 @@ npm start
 <h3><b>Search by City or Pincode:</b> </h3>
 <ul><li>The app allows users to search for weather information by entering either the name of a city or a pincode. This flexibility enables users to retrieve accurate weather data for their desired location.</li>
 <li><b>Search without any Spaces between and/or after city name/pincode, it probably will give error</b></li>
-<li><img src="./src/images/search.png" alt="search"/></li>
+<img src="./src/images/search.png" alt="search"/>
 </ul>
 
 <h3><b>Responsive Design:</b> </h3>
 <ul><li>The app is built with a responsive design, ensuring that it adapts and provides an optimal viewing experience across various devices and screen sizes.</li>
-<li><img src="./src/images/responsive.png" alt="Login"/></li>
+<img src="./src/images/responsive.png" alt="Login"/>
 </ul>
+
 ## ⛏️ Built Using <a name = "built_using"></a>
 
 - [React.js](https://react.dev/)
